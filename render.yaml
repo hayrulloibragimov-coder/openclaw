@@ -6,6 +6,10 @@ services:
     region: oregon
     dockerCommand: node openclaw.mjs gateway --allow-unconfigured
     envVars:
+      - key: HOME
+        value: /tmp
+      - key: TMPDIR
+        value: /tmp
       - key: TELEGRAM_BOT_TOKEN
         sync: false
       - key: GEMINI_API_KEY
