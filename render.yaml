@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node openclaw.mjs gateway --allow-unconfigured --mode=local
+    dockerCommand: node openclaw.mjs gateway --allow-unconfigured
     envVars:
       - key: TELEGRAM_BOT_TOKEN
         sync: false
