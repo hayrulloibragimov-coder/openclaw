@@ -3,7 +3,7 @@ services:
     name: openclaw
     env: docker
     plan: free
-    region: frankfurt
+    region: oregon
     dockerCommand: node openclaw.mjs gateway --allow-unconfigured --mode=local
     envVars:
       - key: TELEGRAM_BOT_TOKEN
