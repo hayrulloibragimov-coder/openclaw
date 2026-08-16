@@ -1,15 +1,17 @@
 services:
-  - type: worker
+  - type: web
     name: openclaw
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node openclaw.mjs gateway --allow-unconfigured
+    dockerCommand: node openclaw.mjs gateway --allow-unconfigured --port 8080
     envVars:
       - key: HOME
         value: /tmp
       - key: TMPDIR
         value: /tmp
+      - key: PORT
+        value: 8080
       - key: TELEGRAM_BOT_TOKEN
         sync: false
       - key: GEMINI_API_KEY
