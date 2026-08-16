@@ -10,9 +10,9 @@ services:
         value: /tmp
       - key: TMPDIR
         value: /tmp
+      - key: OPENCLAW_HOME
+        value: /tmp
       - key: OPENCLAW_STATE_DIR
-        value: /tmp/.openclaw
-      - key: OPENCLAW_CONFIG_DIR
         value: /tmp/.openclaw
       - key: PORT
         value: 8080
