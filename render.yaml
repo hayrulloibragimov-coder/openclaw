@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node -e "const fs=require('fs'),http=require('http'),{spawn}=require('child_process');fs.writeFileSync('/tmp/openclaw.json',JSON.stringify({plugins:{enabled:false}}));http.createServer((q,r)=>r.end('OK')).listen(process.env.PORT||10000,'0.0.0.0');spawn('node',['openclaw.mjs','gateway','--allow-unconfigured','--config','/tmp/openclaw.json'],{stdio:'inherit'});"
+    dockerCommand: node -e "const fs=require('fs'),http=require('http'),{spawn}=require('child_process');fs.writeFileSync('/tmp/openclaw.json',JSON.stringify({plugins:{enabled:false},diagnostics:{memory:{thresholdRatio:2.5}}}));http.createServer((q,r)=>r.end('OK')).listen(process.env.PORT||10000,'0.0.0.0');spawn('node',['openclaw.mjs','gateway','--allow-unconfigured','--config','/tmp/openclaw.json'],{stdio:'inherit'});"
     envVars:
       - key: HOME
         value: /tmp
@@ -17,7 +17,7 @@ services:
       - key: PORT
         value: 10000
       - key: NODE_OPTIONS
-        value: --max-old-space-size=256
+        value: --max-old-space-size=180
       - key: OPENCLAW_DISABLE_UPDATE_CHECK
         value: "true"
       - key: TELEGRAM_BOT_TOKEN
