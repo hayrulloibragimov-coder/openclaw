@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node openclaw.mjs gateway --allow-unconfigured --port 18080
+    dockerCommand: node openclaw.mjs gateway --allow-unconfigured --host 0.0.0.0 --port 10000
     envVars:
       - key: HOME
         value: /tmp
