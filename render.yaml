@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node -e "const fs=require('fs'),http=require('http'),{spawn}=require('child_process');fs.writeFileSync('/tmp/openclaw.json',JSON.stringify({plugins:{enabled:false},diagnostics:{memory:{thresholdRatio:2.5}}}));http.createServer((q,r)=>r.end('OK')).listen(process.env.PORT||10000,'0.0.0.0');spawn('node',['openclaw.mjs','gateway','--allow-unconfigured','--config','/tmp/openclaw.json'],{stdio:'inherit'});"
+    dockerCommand: node openclaw.mjs gateway --allow-unconfigured
     envVars:
       - key: HOME
         value: /tmp
@@ -15,9 +15,11 @@ services:
       - key: OPENCLAW_STATE_DIR
         value: /tmp/.openclaw
       - key: PORT
-        value: 10000
+        value: "10000"
       - key: NODE_OPTIONS
-        value: --max-old-space-size=180
+        value: --max-old-space-size=256
+      - key: OPENCLAW_CONFIG
+        value: '{"plugins":{"enabled":false},"diagnostics":{"memory":{"thresholdRatio":2.5}}}'
       - key: OPENCLAW_DISABLE_UPDATE_CHECK
         value: "true"
       - key: TELEGRAM_BOT_TOKEN
