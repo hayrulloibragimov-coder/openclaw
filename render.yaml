@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node -e "const fs=require('fs'),{spawn}=require('child_process');fs.mkdirSync('/tmp/.openclaw',{recursive:true});fs.writeFileSync('/tmp/.openclaw/openclaw.json',JSON.stringify({gateway:{host:'0.0.0.0',port:10000},plugins:{enabled:false},diagnostics:{memory:{thresholdRatio:3.0}}}));spawn('node',['openclaw.mjs','gateway','--allow-unconfigured'],{stdio:'inherit'});"
+    dockerCommand: node -e "const fs=require('fs'),{spawn}=require('child_process');fs.mkdirSync('/tmp/.openclaw',{recursive:true});fs.writeFileSync('/tmp/.openclaw/openclaw.json',JSON.stringify({gateway:{listen:'0.0.0.0:10000'},plugins:{enabled:false}}));spawn('node',['openclaw.mjs','gateway','--allow-unconfigured'],{stdio:'inherit'});"
     envVars:
       - key: HOME
         value: /tmp
