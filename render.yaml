@@ -4,7 +4,7 @@ services:
     env: docker
     plan: free
     region: oregon
-    dockerCommand: node -e "const fs=require('fs'),{spawn}=require('child_process');fs.mkdirSync('/tmp/.openclaw',{recursive:true});fs.writeFileSync('/tmp/.openclaw/openclaw.json',JSON.stringify({gateway:{listen:'0.0.0.0:10000'},plugins:{enabled:false}}));spawn('node',['openclaw.mjs','gateway','--allow-unconfigured'],{stdio:'inherit'});"
+    dockerCommand: node -e "const fs=require('fs'),http=require('http'),{spawn}=require('child_process');http.createServer((req,res)=>{res.writeHead(200);res.end('OK');}).listen(10000,'0.0.0.0');fs.mkdirSync('/tmp/.openclaw',{recursive:true});fs.writeFileSync('/tmp/.openclaw/openclaw.json',JSON.stringify({gateway:{port:8080},plugins:{enabled:false}}));spawn('node',['openclaw.mjs','gateway','--allow-unconfigured'],{stdio:'inherit'});"
     envVars:
       - key: HOME
         value: /tmp
@@ -15,8 +15,6 @@ services:
       - key: OPENCLAW_STATE_DIR
         value: /tmp/.openclaw
       - key: PORT
-        value: "10000"
-      - key: OPENCLAW_GATEWAY_PORT
         value: "10000"
       - key: NODE_OPTIONS
         value: --max-old-space-size=256
